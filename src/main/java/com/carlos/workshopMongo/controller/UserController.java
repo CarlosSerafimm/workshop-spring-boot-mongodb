@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.carlos.workshopMongo.domain.Post;
 import com.carlos.workshopMongo.domain.User;
 import com.carlos.workshopMongo.dto.UserDTO;
 import com.carlos.workshopMongo.service.UserService;
@@ -60,6 +61,13 @@ public class UserController {
 
         return ResponseEntity.noContent().build();
 
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity <List<Post>> findPosts(@PathVariable String id) {
+
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 
