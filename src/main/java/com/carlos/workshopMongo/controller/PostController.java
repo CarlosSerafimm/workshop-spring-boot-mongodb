@@ -1,5 +1,6 @@
 package com.carlos.workshopMongo.controller;
 
+import com.carlos.workshopMongo.controller.util.URL;
 import com.carlos.workshopMongo.domain.Post;
 import com.carlos.workshopMongo.domain.User;
 import com.carlos.workshopMongo.dto.UserDTO;
@@ -29,6 +30,14 @@ public class PostController {
         Post obj = service.findById(id);
 
         return ResponseEntity.ok().body(obj);
+    }
+    @GetMapping(value = "/titlesearch")
+    public ResponseEntity<List<Post>> findByIdTitle(@RequestParam(value = "text", defaultValue = "") String text) {
+
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitle(text);
+
+        return ResponseEntity.ok().body(list);
     }
 
 
